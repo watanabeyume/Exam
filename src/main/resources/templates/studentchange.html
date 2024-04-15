@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>学生変更</h2>
+<label>入学年度</label>
+<input type="text" class="form-control" id="ent_year" name="ent_year" th:field="*{ent_year}"
+	th:classappend="${#fields.hasErrors('ent_year')} ? 'is-invalid' : 'is-valid'" />
+<divvf="${#fields.hasErrors('ent_year')}" th:errors="*{ent_year}" class="invalid-feedback">errors!
+<label>学生番号</label>
+<input type="text" class="form-control" id="NO" name="NO" th:field="*{NO}"
+	th:classappend="${#fields.hasErrors('NO')} ? 'is-invalid' : 'is-valid'" />
+<divvf="${#fields.hasErrors('NO')}" th:errors="*{NO}" class="invalid-feedback">errors!
+<label>氏名</label>
+<input type="text" class="form-control" id="NAME" name="NAME" th:field="*{NAME}"
+	th:classappend="${#fields.hasErrors('NAME')} ? 'is-invalid' : 'is-valid'" />
+<divvf="${#fields.hasErrors('NAME')}" th:errors="*{NAME}" class="invalid-feedback">errors!
+<label>クラス</label>
+<select name="class_num" id="class_num">
+  <option value="101">101</option>
+  <option value="102">102</option>
+  <option value="103">103</option>
+</select>
+<label>在学中</label>
+<input type="checkbox" name="si_attend" value="在学中">
+<button class="btn btn-warning" th:href="@{/studentchangecomplete/}">変更する</button>
+<a th:href="@{'/studenttop/'}">戻る</a>
+</body>
+</html>

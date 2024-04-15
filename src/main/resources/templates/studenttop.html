@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+	<h2>学生管理</h2>
+	<a class="btn btn-warning" th:href="@{/studentadd/}">新規登録</a>
+	<table class="table table-bordered">
+		<thead>
+			<tr class="table-primary">
+				<th align="center">入学年度</th>
+				<th align="center">学生番号</th>
+				<th align="center">氏名</th>
+				<th align="center">クラス</th>
+				<th align="center">在学中</th>
+				<th class="non"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="student : ${students}">
+				<td th:text="${student.ENT_YEAR}"></td>
+			    <td th:text="${student.NO}"></td>
+			    <td th:text="${student.NAME}"></td>
+				<td th:text="${student.CLASS_NUM}"></td>
+				<td th:text="${student.IS_ATTEND!= null && student.IS_ATTEND ? '◯' : (student.IS_ATTEND != null && !student.IS_ATTEND ? '✕' : '✕')}"></td>
+				<!--
+					 != null && student.isAttend ? '◯' : (student.isAttend != null && !student.isAttend ? '✕' : '✕')}
+				
+				<td><a th:href="@{//studentschange/(id=${student.id})}">変更</a></td>
+				-->
+			</tr>
+		</tbody>
+	</table>
+  <button class="btn btn-primary" type="submit">絞込み</button>
+  <table class="table table-striped">
+			<thead>
+				<th>#</th>
+				<th>入学年度</th>
+				<th>学生番号</th>
+				<th>氏名</th>
+				<th>在学中</th>
+				<th role="action"></th>
+			</thead>
+			<tbody>
+				<tr class="align-middle" th:each="student : ${students}">
+					<td th:text="${student.SCHOOL_CD}"></td>
+					<td th:text="${student.ENT_YEAR}"></td>
+					<td th:text="${student.NO}"></td>
+					<td th:text="${student.NAME}"></td>
+					<td th:text="${student.IS_ATTEND!= null && student.IS_ATTEND ? '◯' : (student.IS_ATTEND != null && !student.IS_ATTEND ? '✕' : '✕')}"></td>
+					<td>
+						<a class="btn btn-warning" th:href="@{/studentchange/{id}(id=*{id})}">変更</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div th:unless="${list!=null and !list.empty}">
+		<div class="alert alert-danger" role="alert">
+			学生情報が存在しませんでした
+		</div>
+	</div>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

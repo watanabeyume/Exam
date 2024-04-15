@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>得点管理システム</title>
+<h1>得点管理システム</h1>
+	<div>
+		<nav>
+			<a class="btn btn-warning" th:href="@{/top/}">メニュー</a>
+			<div>
+				<a class="btn btn-warning" th:href="@{/studenttop/}">学生管理</a>
+			</div>
+			<div>
+				成績管理
+				<li>
+					<a class="btn btn-warning" th:href="@{/testadd/}">成績登録</a>
+				</li>
+				<li>
+					<a class="btn btn-warning" th:href="@{/testview/}">成績参照</a>
+				</li>
+			</div>
+			<div>
+				<a class="btn btn-warning" th:href="@{/subjectadd/}">科目管理</a>
+			</div>
+		</nav>
+	</div>
+</head>
+<body>
+	<h2>メニュー</h2>
+	<a class="btn btn-warning" th:href="@{/student/}">学生管理</a>
+	<div>
+		成績管理
+		<a class="btn btn-warning" th:href="@{/testregistration/}">成績登録</a>
+		<a class="btn btn-warning" th:href="@{/testreference/}">成績参照</a>
+	</div>
+	<a class="btn btn-warning" th:href="@{/subject/}">科目管理</a>
+</body>
+</html>
+	
+</body>
+</html>
