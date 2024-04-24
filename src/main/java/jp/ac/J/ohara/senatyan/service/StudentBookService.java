@@ -40,9 +40,10 @@ public class StudentBookService {
 		 * @param StudentBook schoolBook
 		 */
 		public void save(@NonNull StudentBook studentBook) {
+			studentBook.setIsAttend(true);
 			this.repository.save(studentBook);
 		}
-	 
+	
 		/**
 		 * データの削除
 		 * @param @NonNull Long index
@@ -50,5 +51,59 @@ public class StudentBookService {
 		public void delete(@NonNull Long index) {
 			this.repository.deleteById(index);
 		}
+		// 受け取ったidからデータを取得して、Formを返却する
+	    public StudentBook getOneBook(Long index) {
+			
+	        // idを指定して本の情報を取得する
+	    	StudentBook studentBook = repository.findById(index).orElseThrow();
+			
+	        // 画面返却用のFormに値を設定する
+	    	/*
+	        Student editstudent = new Student();
+	        editstudent.setNAME(student.getNAME());
+	        editstudent.setCLASS_NUM(student.getCLASS_NUM());
+			*/
+	        return studentBook;
+	    }
+	    
+	// 本を更新する
+	    public void update(StudentBook editstudent) {
+			
+	        // データベースに登録する値を保持するインスタンスの作成
+	        //Student student = new Student();
+			
+	        // 画面から受け取った値を設定する
+	    	/*
+	        student.setId(editstudent.getId());
+	        student.setNAME(editstudent.getNAME());
+	        student.setCLASS_NUM(editstudent.getCLASS_NUM());
+	        */
+			
+	        // データベースを更新する
+	        repository.save(editstudent);
+	    }
+	    public List<StudentBook> filterStudents(Integer entYear, String classNum, Boolean isAttend) {
+	        List<StudentBook> students = repository.findAll();
+	 
+	        // 入学年度で絞り込み
+	        if (entYear != null) {
+	            students = repository.findByEntYear(entYear);
+	        }
+	 
+	        // クラス番号で絞り込み
+	        if (classNum != null && !classNum.isEmpty()) {
+	            List<StudentBook> classNumStudents = repository.findByClassNum(classNum);
+	            students.retainAll(classNumStudents);
+	        }
+	 
+	        // 在学状況で絞り込み
+	        if (isAttend != null) {
+	            List<StudentBook> isAttendStudents = repository.findByIsAttend(isAttend);
+	            students.retainAll(isAttendStudents);
+	        }
+	 
+	        return students;
+	    }
+	}
 	
-}
+

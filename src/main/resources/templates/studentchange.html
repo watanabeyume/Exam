@@ -2,31 +2,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>得点管理システム</title>
 </head>
 <body>
 <h2>学生変更</h2>
-<label>入学年度</label>
-<input type="text" class="form-control" id="ent_year" name="ent_year" th:field="*{ent_year}"
-	th:classappend="${#fields.hasErrors('ent_year')} ? 'is-invalid' : 'is-valid'" />
-<divvf="${#fields.hasErrors('ent_year')}" th:errors="*{ent_year}" class="invalid-feedback">errors!
-<label>学生番号</label>
-<input type="text" class="form-control" id="NO" name="NO" th:field="*{NO}"
-	th:classappend="${#fields.hasErrors('NO')} ? 'is-invalid' : 'is-valid'" />
-<divvf="${#fields.hasErrors('NO')}" th:errors="*{NO}" class="invalid-feedback">errors!
-<label>氏名</label>
-<input type="text" class="form-control" id="NAME" name="NAME" th:field="*{NAME}"
-	th:classappend="${#fields.hasErrors('NAME')} ? 'is-invalid' : 'is-valid'" />
-<divvf="${#fields.hasErrors('NAME')}" th:errors="*{NAME}" class="invalid-feedback">errors!
-<label>クラス</label>
-<select name="class_num" id="class_num">
-  <option value="101">101</option>
-  <option value="102">102</option>
-  <option value="103">103</option>
-</select>
-<label>在学中</label>
-<input type="checkbox" name="si_attend" value="在学中">
-<button class="btn btn-warning" th:href="@{/studentchangecomplete/}">変更する</button>
+<form th:action="@{/studentchange/{id}/(id=${studentBook.id})}" th:object="${studentBook}" method="post">
+	
+	<div class="mb-3">
+                <p th:if="${#fields.hasErrors('entYear')}" th:errors="*{entYear}" class="text-danger">entYear Error</p>
+                <label for="entYear" class="form-label">入学年度</label>
+                <input id="entYear" class="form-control" type="text" th:field="*{entYear}" readonly>
+    </div>
+	<div class="mb-3">
+                <p th:if="${#fields.hasErrors('no')}" th:errors="*{no}" class="text-danger">no Error</p>
+                <label for="no" class="form-label">学生番号</label>
+                <input id="no" class="form-control" type="text" th:field="*{no}" readonly>
+    </div>
+	<div>
+		<label>氏名</label>
+		<input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+			th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'" />
+		<divvf="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">errors!
+	</div>
+	<div>
+		<label>クラス</label>
+		<select name="classNum" id="classNum" th:field="*{classNum}" class="form-control" required>
+		  <option value="101">101</option>
+		  <option value="102">102</option>
+		  <option value="103">103</option>
+		</select>
+	</div>
+	<div class="search-box">
+		<span>
+			<label>在学中</label>
+		</span>
+		<input type="checkbox" id="isAttend" name="isAttend" th:checked="${studentBook.isAttend}" value="1">
+	</div>
+<!--<button class="btn btn-warning" th:href="@{/studentchangecomplete/}">変更する</button>-->
+<input type="submit" class="btn btn-primary" value="変更する">
 <a th:href="@{'/studenttop/'}">戻る</a>
 </body>
 </html>

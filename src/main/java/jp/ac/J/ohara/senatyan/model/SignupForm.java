@@ -12,7 +12,7 @@ public class SignupForm {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@NotBlank
-	private String NO;
+	private String no;
 	@NotBlank
 	private String password;
 }

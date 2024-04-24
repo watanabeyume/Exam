@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>科目管理システム</title>
+</head>
+<body>
+<h2>科目登録</h2>
+<form th:action="@{/subjectadd/}" th:object="${subjectBook}" method="post">
+	
+	<div>
+		<label>科目コード</label>
+		<input type="text" class="form-control" id="cd" name="cd" th:field="*{cd}"
+			th:classappend="${#fields.hasErrors('cd')} ? 'is-invalid' : 'is-valid'" />
+		<div th:if="${#fields.hasErrors('cd')}" th:errors="*{cd}" class="invalid-feedback">errors!</div>
+	</div>
+	<div>
+		<label>科目名</label>
+		<input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+			th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'" />
+		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">errors!</div>
+	</div>
+	<div>
+		<input type="hidden" id="schoolCd" name="schoolCd" value="001">
+	</div>
+
+	<button class="btn btn-warning" type="submit">登録する</button>
+</form>
+<a th:href="@{'/subjecttop/'}">戻る</a>
+</body>
+</html>

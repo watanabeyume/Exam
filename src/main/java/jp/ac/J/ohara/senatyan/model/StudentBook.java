@@ -8,38 +8,32 @@ import jakarta.persistence.Table;
 import lombok.Data;
  
  
- 
 @Data
 @Entity
 @Table(name="STUDENT")
 public class StudentBook{
 	@Id
+	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
 	//学生番号
-	@Column(name = "NO", length = 10, nullable = false)
-	private String NO;
-	
+	@Column(name = "no", length = 10, nullable = false)
+	private String no;
 	//学生名
-	@Column(name = "NAME",length = 10, nullable = true)
-	private String NAME;
-	
+	@Column(name = "name", length = 10, nullable = true)
+	private String name;
 	//入学年度
-		@Column(name = "ENT_YEAR",length = 10, nullable = true)
-		private int ENT_YEAR;
-		
+		@Column(name = "entYear", length = 10, nullable = true)
+		private int entYear;
 	//クラス番号
-		@Column(name = "CLASS_NUM",length = 3, nullable = true)
-		private String CLASS_NUM;
-		
+		@Column(name = "classNum", length = 3, nullable = true)
+		private String classNum;
 	//在学中フラグ
-		@Column(name = "IS_ATTEND",length = 10, nullable = true)
-		private String IS_ATTEND;
-	
-	//学生名
-		@Column(name = "SCHOOL_CD",length = 3, nullable = true)
-		private String SCHOOL_CD;
-	
+		@Column(name = "isAttend", nullable = true)
+		private Boolean isAttend;
+	//学校コード
+		@Column(name = "schoolCd", length = 3, nullable = true)
+		private String schoolCd;
+
  
 }
